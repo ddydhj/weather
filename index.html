@@ -22,7 +22,7 @@
         }
 
         $(document).ready(function () {
-            var url = "http://api.map.baidu.com/telematics/v3/weather?location=郑州&output=json&ak=iw5m2G7ayDow8ofDdDGVUMB3&mcode=com.BaiduWeather&callback=?";
+            var url = "https://api.map.baidu.com/telematics/v3/weather?location=郑州&output=json&ak=iw5m2G7ayDow8ofDdDGVUMB3&mcode=com.BaiduWeather&callback=?";
             $.getJSON(url, function (data) {
                 console.log(data.results[0].currentCity);
 
