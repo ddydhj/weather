@@ -1,0 +1,82 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+    line-height: 30px;
+}
+
+body {
+    text-shadow: 1px 0px 0 #ccc;
+    background-image: linear-gradient(to bottom, #0D68BC, #90ADE0);
+    background-repeat: no-repeat;
+    color: #ffffff;
+}
+
+header {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 60px;
+}
+
+section {
+    text-align: center;
+}
+
+.icon {
+    background-image: url(../images/days/xue.png);
+    background-repeat: no-repeat;
+    width: 42px;
+    height: 42px;
+    background-position: center center;
+    margin: 10px auto;
+}
+
+main .temp {
+    font-size: 18px;
+}
+
+main .temp sup {
+    font-size: 20px;
+}
+
+main .wind, .main .current {
+    font-size: 14px;
+}
+
+.item {
+    float: left;
+    width: 33.333333%;
+    border-right: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+section:nth-last-child(1).item {
+    border-right: none;
+}
+
+footer {
+    font-size: 14px;
+    width: 60%;
+    margin: 30px auto 0 auto;
+}
+
+footer .icon {
+    margin: 5px auto;
+    opacity: 0.7;
+    background-image: url(../images/days/qing.png);
+    /* width: 128px;
+    height: 128px;
+    background-size: 50%; */
+}
+
+.clearfix:after {
+    height: 0;
+    display: block;
+    content: "";
+    clear: both;
+}

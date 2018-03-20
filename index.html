@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>天气预报</title>
+    <link rel="stylesheet" href="css/index.css">
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/index.js"></script>
+    <script>
+        function getAPIName(pm25) {
+            var api;
+            if (pm25 <= 50) api = '空气优秀';
+            if (pm25 >= 51 && pm25 <= 100) api = '空气良好';
+            if (pm25 >= 101 && pm25 <= 150) api = '轻微污染';
+            if (pm25 >= 151 && pm25 <= 200) api = '轻度污染';
+            if (pm25 >= 201 && pm25 <= 300) api = '中度污染';
+            if (pm25 > 300) api = '重度污染';
+            if (pm25 > 500) api = '已爆表！';
+            return api;
+        }
+
+        $(document).ready(function () {
+            var url = "http://api.map.baidu.com/telematics/v3/weather?location=郑州&output=json&ak=iw5m2G7ayDow8ofDdDGVUMB3&mcode=com.BaiduWeather&callback=?";
+            $.getJSON(url, function (data) {
+                console.log(data.results[0].currentCity);
+
+                data = data.results[0];
+                var weather = data.weather_data[0];
+
+                $("header").text(data.currentCity);
+
+                var imgURL = weather.dayPictureUrl;
+                $("main .icon").css({
+                    "background-image": "url(" + imgURL + ")"
+                })
+
+                var temp = weather.temperature.replace("℃", "") + "<sup>℃</sup>";
+                $("main .temp").html(temp);
+
+                $("main .weather").text(weather.weather);
+
+                $("main .wind").text(weather.wind);
+
+                var index = weather.date.indexOf("：") + 1;
+                var currTemp = weather.date.substring(index).replace(")", "");
+                var current = "实时温度：" + currTemp + "，空气指数：" + data.pm25 + " " + getAPIName(data.pm25);
+                $("main .current").text(current);
+
+                var weather1 = data.weather_data[1];
+                $(".item:nth-child(1) .week").text(weather1.date);
+                $(".item:nth-child(1) .icon").css({
+                    "background-image": "url(" + weather1.dayPictureUrl +")"
+                });
+                var temp1 = weather1.temperature.replace("℃", "") + "<sup>℃</sup>";
+                $(".item:nth-child(1) .temp").html(temp1);
+                $(".item:nth-child(1) .weather").text(weather1.weather);
+                $(".item:nth-child(1) .wind").text(weather1.wind);
+
+                var weather2 = data.weather_data[2];
+                $(".item:nth-child(2) .week").text(weather2.date);
+                $(".item:nth-child(2) .icon").css({
+                    "background-image": "url(" + weather2.dayPictureUrl +")"
+                });
+                var temp2 = weather2.temperature.replace("℃", "") + "<sup>℃</sup>";
+                $(".item:nth-child(2) .temp").html(temp2);
+                $(".item:nth-child(2) .weather").text(weather2.weather);
+                $(".item:nth-child(2) .wind").text(weather2.wind);
+
+                var weather3 = data.weather_data[3];
+                $(".item:nth-child(3) .week").text(weather3.date);
+                $(".item:nth-child(3) .icon").css({
+                    "background-image": "url(" + weather3.dayPictureUrl +")"
+                });
+                var temp3 = weather3.temperature.replace("℃", "") + "<sup>℃</sup>";
+                $(".item:nth-child(3) .temp").html(temp3);
+                $(".item:nth-child(3) .weather").text(weather3.weather);
+                $(".item:nth-child(3) .wind").text(weather3.wind);
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <header>
+        郑州市
+    </header>
+    <main>
+        <section class="icon"></section>
+        <section class="temp">-13 ~ 2
+            <sup>℃</sup>
+        </section>
+        <section class="weather">小雪</section>
+        <section class="wind">微风</section>
+        <section class="current">实时温度：13℃，空气指数 135 轻度污染</section>
+    </main>
+    <footer class="clearfix">
+        <section class="item">
+            <section class="week">周二</section>
+            <section class="icon"></section>
+            <section class="temp">-13 ~ 2
+                <sup>℃</sup>
+            </section>
+            <section class="weather">小雪</section>
+            <section class="wind">微风</section>
+        </section>
+        <section class="item">
+            <section class="week">周二</section>
+            <section class="icon"></section>
+            <section class="temp">-13 ~ 2
+                <sup>℃</sup>
+            </section>
+            <section class="weather">小雪</section>
+            <section class="wind">微风</section>
+        </section>
+        <section class="item">
+            <section class="week">周二</section>
+            <section class="icon"></section>
+            <section class="temp">-13 ~ 2
+                <sup>℃</sup>
+            </section>
+            <section class="weather">小雪</section>
+            <section class="wind">微风</section>
+        </section>
+    </footer>
+</body>
+
+</html>
